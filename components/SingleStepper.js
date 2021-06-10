@@ -1,27 +1,26 @@
 import React, {useState} from 'react';
 import { StyleSheet, TextInput, Text, View, TouchableOpacity } from 'react-native'
 
-const RoundsStepper = () => {
-    const [num, setNum] = useState(0)
+const SingleStepper = ({title, number, type, increaseNumber, decreaseNumber, setNumber}) => {
 
     return (
         <View style={styles.container}>  
             <View>
-                <Text style={styles.title}>Rounds</Text>
+                <Text style={styles.title}>{title}</Text>
              </View>
             <View style={styles.row}>  
-                <TouchableOpacity onPress={() => setNum( num > 1 ? num - 1 : num )}>
+                <TouchableOpacity onPress={() => decreaseNumber(number, type)}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>-</Text>
                     </View>
                 </TouchableOpacity>
 
                 <TextInput keyboardType="number-pad" 
-                onChangeText={num => setNum( num != "" ? Number(num) : null)}
-                onEndEditing={() => setNum( num === null ? 1 : num)}
-                style={styles.number}>{num}</TextInput>
+                onChangeText={num => setNumber( num , type)}
+                onEndEditing={() => { number === null ? setNumber(1, type) : setNumber(number, type)}}
+                style={styles.number}>{number}</TextInput>
 
-                <TouchableOpacity onPress={() => setNum( num + 1 )}>
+                <TouchableOpacity onPress={() => increaseNumber(number, type)}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>+</Text>
                     </View>
@@ -31,13 +30,13 @@ const RoundsStepper = () => {
     )
 }
 
-export default RoundsStepper
+export default SingleStepper
 
 const styles = StyleSheet.create({
     container:{
         width: '75%',
-        padding: 20,
-        marginBottom:20,
+        padding: 10,
+        margin:10,
         justifyContent: "space-evenly",
         alignItems:'center',
         borderWidth: 1,
@@ -45,8 +44,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     title: {
-        fontSize:30,
-        marginBottom: 15},
+        fontSize:25,
+        marginBottom: 5},
      row:{
          width: '100%',
         flexDirection: "row",
@@ -57,11 +56,12 @@ const styles = StyleSheet.create({
         fontSize: 40,
     },
     button: {
+    fontSize: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 60,
-    height: 60,
-    borderRadius: 60/2,
+    width: 50,
+    height: 50,
+    borderRadius: 50/2,
     backgroundColor: '#2196F3'
   },
   buttonText: {

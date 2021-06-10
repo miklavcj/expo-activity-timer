@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import { StyleSheet, TextInput, Text, View, TouchableOpacity } from 'react-native'
 
-const TimeStepper = () => {
+const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreseTime, setTime}) => {
     const [min, setMin] = useState("00")
     const [sec, setSec] = useState("00")
 
     return (
         <View style={styles.container}>  
             <View>
-                <Text style={styles.title}>Time</Text>
+                <Text style={styles.title}>{title}</Text>
              </View>
             <View style={styles.row}>  
                 <TouchableOpacity onPress={() => setSec( sec > 1 ? sec - 1 : sec )}>
@@ -40,7 +40,8 @@ export default TimeStepper
 const styles = StyleSheet.create({
     container:{
         width: '75%',
-        padding: 20,
+        padding: 10,
+        margin:10,
         justifyContent: "space-evenly",
         alignItems:'center',
         borderWidth: 1,
@@ -48,8 +49,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     title: {
-        fontSize:30,
-        paddingBottom: 10},
+        fontSize:25,
+        paddingBottom: 5},
      row:{
          width: '100%',
         flexDirection: "row",
@@ -60,11 +61,12 @@ const styles = StyleSheet.create({
         fontSize: 40,
     },
     button: {
+    fontSize: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 60,
-    height: 60,
-    borderRadius: 60/2,
+    width: 50,
+    height: 50,
+    borderRadius: 50/2,
     backgroundColor: '#2196F3'
   },
   buttonText: {
