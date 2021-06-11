@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, TextInput, Text, View, TouchableOpacity } from 'react-native'
 
-const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreaseTime, setTime}) => {
+const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreaseTime, setMinutes, setSeconds}) => {
     const [min, setMin] = useState("00")
     const [sec, setSec] = useState("00")
 
@@ -11,21 +11,29 @@ const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreaseTime
                 <Text style={styles.title}>{title}</Text>
              </View>
             <View style={styles.row}>  
-                <TouchableOpacity onPress={() => decreaseTime(type )}>
+                <TouchableOpacity onPress={() => decreaseTime(type)}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>-</Text>
                     </View>
                 </TouchableOpacity>
 
-                <TextInput keyboardType="number-pad" 
-                onChangeText={min => setMin( min != "" ? Number(min) : null)}
-                style={styles.number}>{minutes}</TextInput>
-                <Text>:</Text>
-                <TextInput keyboardType="number-pad" 
-                onChangeText={sec => setSec( sec != "" ? Number(sec) : null)}
-                style={styles.number}>{seconds}</TextInput>
+                <View style={styles.timeRow}>
+                    <TextInput keyboardType="number-pad" 
+                    maxLength = {2}
+                    onChangeText={min => { min != "" ? setMinutes(min, type, "edit") : setMinutes(null, type, "edit")}}
+                    onEndEditing={() => setMinutes(minutes, type, "done")}
+                    style={styles.number}>{minutes}</TextInput>
 
-                <TouchableOpacity onPress={() => increaseTime(type )}>
+                    <Text style={styles.timeDivider}>:</Text>
+
+                    <TextInput keyboardType="number-pad" 
+                    maxLength = {3}
+                    onChangeText={sec => { sec != "" ? setSeconds(sec, type, "edit") : setSeconds(null, type, "edit")}}
+                    onEndEditing={() => setSeconds(seconds, type, "done")}
+                    style={styles.number}>{seconds}</TextInput>
+                </View>
+
+                <TouchableOpacity onPress={() => increaseTime(type)}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>+</Text>
                     </View>
@@ -57,6 +65,15 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems:'center',
     },
+     timeRow:{
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems:'center',
+    },
+    timeDivider:{
+        fontSize:25,
+        marginLeft:5, 
+        marginRight:5},
     number: {
         fontSize: 40,
     },

@@ -57,7 +57,44 @@ export default function App() {
     }
   };
 
-  const setTime = (minutes, seconds, type) => {
+  const setMinutes = (minutes, type, action) => {
+    if(action === "edit") {
+      if(minutes === null) {
+        setWorkMin(null)
+      } else {
+        setWorkMin(minutes)
+      }
+    }
+    if(action === "done") {
+      if(minutes === null) {
+        setWorkMin("00")
+      } else {
+        setWorkMin(minutes >= 10 ? `${minutes}` : `0${minutes}`)
+      }
+    }  
+  };
+
+  const setSeconds = (seconds, type, action) => {
+      if(action === "edit") {
+      if(seconds === null) {
+        setWorkSec(null)
+      } else {
+        setWorkSec(seconds)
+      }
+    }
+    if(action === "done") {
+      if(seconds === null) {
+        setWorkSec("00")
+      } else if (seconds < 60 ) {
+        setWorkSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)
+      } else {
+        const calculatedMin = Math.floor(seconds/60)
+        const remainingSec = seconds % 60
+
+        setWorkSec(remainingSec >= 10 ? `${remainingSec}` : `0${remainingSec}`)
+        setWorkMin(calculatedMin >= 10 ? `${calculatedMin}` : `0${calculatedMin}`)
+      }
+    }  
   };
 
   return (
@@ -79,7 +116,8 @@ export default function App() {
         seconds={workSec}
         increaseTime={increaseTime}
         decreaseTime={decreaseTime}
-        setTime={setTime}
+        setMinutes={setMinutes}
+        setSeconds={setSeconds}
          />
       <SingleStepper
         title="Rounds"

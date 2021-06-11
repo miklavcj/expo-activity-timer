@@ -16,6 +16,7 @@ const SingleStepper = ({title, number, type, increaseNumber, decreaseNumber, set
                 </TouchableOpacity>
 
                 <TextInput keyboardType="number-pad" 
+                maxLength = {3}
                 onChangeText={num => setNumber( num , type)}
                 onEndEditing={() => { number === null ? setNumber(1, type) : setNumber(number, type)}}
                 style={styles.number}>{number}</TextInput>
