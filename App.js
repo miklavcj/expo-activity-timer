@@ -11,6 +11,12 @@ export default function App() {
   const [workMin, setWorkMin] = useState("00");
   const [workSec, setWorkSec] = useState("00");
 
+  const [restMin, setRestMin] = useState("00");
+  const [restSec, setRestSec] = useState("00");
+
+  const [roundsRestMin, setRoundsRestMin] = useState("00");
+  const [roundsRestSec, setRoundsRestSec] = useState("00");
+
   const increaseNumber = (number, type) => {
     type === "sets" ? setSetsNum(number + 1): setRoundsNum(number + 1) ;
     
@@ -25,25 +31,48 @@ export default function App() {
   };
 
   const increaseTime = (type) => { 
-    let newSec = Number(workSec) + 1
-    if(newSec === 60) {
-      let newMin = Number(workMin) + 1
-      console.log("min",newMin)
-      setWorkSec("00")
-      setWorkMin( newMin >= 10 ? `${newMin}` : `0${newMin}`)
-      
-    } else {
-    setWorkSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+    if(type === "work") {
+      let newSec = Number(workSec) + 1
+      if(newSec === 60) {
+        let newMin = Number(workMin) + 1
+        console.log("min",newMin)
+        setWorkSec("00")
+        setWorkMin( newMin >= 10 ? `${newMin}` : `0${newMin}`) 
+      } else {
+      setWorkSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+      }
     }
 
+    if(type === "rest") {
+      let newSec = Number(restSec) + 1
+      if(newSec === 60) {
+        let newMin = Number(restMin) + 1
+        setRestSec("00")
+        setRestMin( newMin >= 10 ? `${newMin}` : `0${newMin}`) 
+      } else {
+      setRestSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+      }
+    }
 
+     if(type === "roundsRest") {
+      let newSec = Number(roundsRestSec) + 1
+      if(newSec === 60) {
+        let newMin = Number(roundsRestMin) + 1
+        setRoundsRestSec("00")
+        setRoundsRestMin( newMin >= 10 ? `${newMin}` : `0${newMin}`) 
+      } else {
+      setRoundsRestSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+      }
+    }
+    
   };
 
   const decreaseTime = ( type) => {
-    let newSec = Number(workSec) - 1
-     if(newSec === 0) {
+    if(type === "work") {
+      let newSec = Number(workSec) - 1
+      if(newSec === 0) {
       setWorkSec("00")      
-    } else if (newSec < 0) {
+      } else if (newSec < 0) {
       if(Number(workMin) === 0) {
         setWorkSec("00")
         setWorkMin("00")
@@ -53,46 +82,112 @@ export default function App() {
       setWorkMin( newMin >= 10 ? `${newMin}` : `0${newMin}`)
       }
     } else {
-    setWorkSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+       setWorkSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+    } 
     }
+
+    if(type === "rest") {
+      let newSec = Number(restSec) - 1
+      if(newSec === 0) {
+      setRestSec("00")      
+      } else if (newSec < 0) {
+      if(Number(restMin) === 0) {
+        setRestSec("00")
+        setRestMin("00")
+      } else{
+        setRestSec("59")
+      let newMin = Number(restMin) - 1
+      setRestMin( newMin >= 10 ? `${newMin}` : `0${newMin}`)
+      }
+    } else {
+       setRestSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+    } 
+    }
+
+    if(type === "roundsRest") {
+      let newSec = Number(roundsRestSec) - 1
+      if(newSec === 0) {
+      setRoundsRestSec("00")      
+      } else if (newSec < 0) {
+      if(Number(roundsRestMin) === 0) {
+        setRoundsRestSec("00")
+        setRoundsRestMin("00")
+      } else{
+        setRoundsRestSec("59")
+      let newMin = Number(roundsRestMin) - 1
+      setRoundsRestMin( newMin >= 10 ? `${newMin}` : `0${newMin}`)
+      }
+    } else {
+       setRoundsRestSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+    } 
+    }
+    
   };
 
   const setMinutes = (minutes, type, action) => {
     if(action === "edit") {
       if(minutes === null) {
-        setWorkMin(null)
+        if(type==="work") {setWorkMin(null)}
+        if(type==="rest") {setRestMin(null)}
+        if(type==="roundsRest") {setRoundsRestMin(null)}
+        
       } else {
-        setWorkMin(minutes)
+        if(type==="work") {setWorkMin(minutes)}
+        if(type==="rest") {setRestMin(minutes)}
+        if(type==="roundsRest") {setRoundsRestMin(minutes)}
       }
     }
     if(action === "done") {
       if(minutes === null) {
-        setWorkMin("00")
+         if(type==="work") {setWorkMin("00")}
+        if(type==="rest") {setRestMin("00")}
+        if(type==="roundsRest") {setRoundsRestMin("00")}
       } else {
-        setWorkMin(minutes >= 10 ? `${minutes}` : `0${minutes}`)
+         if(type==="work") {setWorkMin(minutes >= 10 ? `${minutes}` : `0${minutes}`)}
+        if(type==="rest") {setRestMin(minutes >= 10 ? `${minutes}` : `0${minutes}`)}
+        if(type==="roundsRest") {setRoundsRestMin(minutes >= 10 ? `${minutes}` : `0${minutes}`)}
       }
     }  
   };
 
   const setSeconds = (seconds, type, action) => {
       if(action === "edit") {
-      if(seconds === null) {
-        setWorkSec(null)
-      } else {
-        setWorkSec(seconds)
-      }
+        if(seconds === null) {
+          if(type==="work") {setWorkSec(null)}
+          if(type==="rest") {setRestSec(null)}
+          if(type==="roundsRest") {setRoundsRestSec(null)}
+        } else {
+          if(type==="work") {setWorkSec(seconds)}
+          if(type==="rest") {setRestSec(seconds)}
+          if(type==="roundsRest") {setRoundsRestSec(seconds)}
+        }
     }
     if(action === "done") {
       if(seconds === null) {
-        setWorkSec("00")
+        if(type==="work") {setWorkSec("00")}
+        if(type==="rest") {setRestSec("00")}
+        if(type==="roundsRest") {setRoundsRestSec("00")}
+
       } else if (seconds < 60 ) {
-        setWorkSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)
+        if(type==="work") {setWorkSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)}
+        if(type==="rest") {setRestSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)}
+        if(type==="roundsRest") {setRoundsRestSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)}
       } else {
         const calculatedMin = Math.floor(seconds/60)
         const remainingSec = seconds % 60
 
-        setWorkSec(remainingSec >= 10 ? `${remainingSec}` : `0${remainingSec}`)
-        setWorkMin(calculatedMin >= 10 ? `${calculatedMin}` : `0${calculatedMin}`)
+        if(type==="work") {
+          setWorkSec(remainingSec >= 10 ? `${remainingSec}` : `0${remainingSec}`)
+          setWorkMin(calculatedMin >= 10 ? `${calculatedMin}` : `0${calculatedMin}`)
+        }
+        if(type==="rest") {
+          setRestSec(remainingSec >= 10 ? `${remainingSec}` : `0${remainingSec}`)
+          setRestMin(calculatedMin >= 10 ? `${calculatedMin}` : `0${calculatedMin}`)
+        }
+        if(type==="roundsRest") {
+          setRoundsRestSec(remainingSec >= 10 ? `${remainingSec}` : `0${remainingSec}`)
+          setRoundsRestMin(calculatedMin >= 10 ? `${calculatedMin}` : `0${calculatedMin}`)
+        }
       }
     }  
   };
@@ -119,6 +214,17 @@ export default function App() {
         setMinutes={setMinutes}
         setSeconds={setSeconds}
          />
+
+      <TimeStepper
+        title="Rest"
+        type="rest"
+        minutes={restMin}
+        seconds={restSec}
+        increaseTime={increaseTime}
+        decreaseTime={decreaseTime}
+        setMinutes={setMinutes}
+        setSeconds={setSeconds}
+         />
       <SingleStepper
         title="Rounds"
         type="rounds"
@@ -127,7 +233,19 @@ export default function App() {
         decreaseNumber={decreaseNumber}
         setNumber={setNumber}
       />
+      
+      <TimeStepper
+        title="Rest between rounds"
+        type="roundsRest"
+        minutes={roundsRestMin}
+        seconds={roundsRestSec}
+        increaseTime={increaseTime}
+        decreaseTime={decreaseTime}
+        setMinutes={setMinutes}
+        setSeconds={setSeconds}
+         />
     </View>
+    
   );
 }
 

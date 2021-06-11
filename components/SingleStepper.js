@@ -36,17 +36,17 @@ export default SingleStepper
 const styles = StyleSheet.create({
     container:{
         width: '75%',
-        padding: 10,
-        margin:10,
+        paddingBottom: 10,
+        margin:15,
         justifyContent: "space-evenly",
         alignItems:'center',
-        borderWidth: 1,
+        borderBottomWidth: 1,
         borderColor: "#ddd",
         borderRadius: 20,
     },
     title: {
         fontSize:25,
-        marginBottom: 5},
+        marginBottom: 10},
      row:{
          width: '100%',
         flexDirection: "row",
