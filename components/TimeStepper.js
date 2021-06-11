@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, TextInput, Text, View, TouchableOpacity } from 'react-native'
 
-const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreseTime, setTime}) => {
+const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreaseTime, setTime}) => {
     const [min, setMin] = useState("00")
     const [sec, setSec] = useState("00")
 
@@ -11,7 +11,7 @@ const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreseTime,
                 <Text style={styles.title}>{title}</Text>
              </View>
             <View style={styles.row}>  
-                <TouchableOpacity onPress={() => setSec( sec > 1 ? sec - 1 : sec )}>
+                <TouchableOpacity onPress={() => decreaseTime(type )}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>-</Text>
                     </View>
@@ -19,13 +19,13 @@ const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreseTime,
 
                 <TextInput keyboardType="number-pad" 
                 onChangeText={min => setMin( min != "" ? Number(min) : null)}
-                style={styles.number}>{min}</TextInput>
+                style={styles.number}>{minutes}</TextInput>
                 <Text>:</Text>
                 <TextInput keyboardType="number-pad" 
                 onChangeText={sec => setSec( sec != "" ? Number(sec) : null)}
-                style={styles.number}>{sec}</TextInput>
+                style={styles.number}>{seconds}</TextInput>
 
-                <TouchableOpacity onPress={() => setSec( sec + 1 )}>
+                <TouchableOpacity onPress={() => increaseTime(type )}>
                     <View style={styles.button}>
                         <Text style={styles.buttonText}>+</Text>
                     </View>

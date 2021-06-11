@@ -24,6 +24,42 @@ export default function App() {
      type === "sets" ? setSetsNum( number != "" ? Number(number) : null) : setRoundsNum( number != "" ? Number(number) : null)
   };
 
+  const increaseTime = (type) => { 
+    let newSec = Number(workSec) + 1
+    if(newSec === 60) {
+      let newMin = Number(workMin) + 1
+      console.log("min",newMin)
+      setWorkSec("00")
+      setWorkMin( newMin >= 10 ? `${newMin}` : `0${newMin}`)
+      
+    } else {
+    setWorkSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+    }
+
+
+  };
+
+  const decreaseTime = ( type) => {
+    let newSec = Number(workSec) - 1
+     if(newSec === 0) {
+      setWorkSec("00")      
+    } else if (newSec < 0) {
+      if(Number(workMin) === 0) {
+        setWorkSec("00")
+        setWorkMin("00")
+      } else{
+        setWorkSec("59")
+      let newMin = Number(workMin) - 1
+      setWorkMin( newMin >= 10 ? `${newMin}` : `0${newMin}`)
+      }
+    } else {
+    setWorkSec(newSec >= 10 ? `${newSec}` : `0${newSec}`)
+    }
+  };
+
+  const setTime = (minutes, seconds, type) => {
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="dark" />
@@ -36,7 +72,15 @@ export default function App() {
         setNumber={setNumber}
       />
 
-      <TimeStepper />
+      <TimeStepper
+        title="Work"
+        type="work"
+        minutes={workMin}
+        seconds={workSec}
+        increaseTime={increaseTime}
+        decreaseTime={decreaseTime}
+        setTime={setTime}
+         />
       <SingleStepper
         title="Rounds"
         type="rounds"
