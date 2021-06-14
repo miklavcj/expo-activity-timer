@@ -35,14 +35,13 @@ export default SingleStepper
 
 const styles = StyleSheet.create({
     container:{
-        width: '75%',
+        width: '50%',
         paddingBottom: 10,
         margin:15,
         justifyContent: "space-evenly",
         alignItems:'center',
         borderBottomWidth: 1,
         borderColor: "#ddd",
-        borderRadius: 20,
     },
     title: {
         fontSize:25,
@@ -54,21 +53,19 @@ const styles = StyleSheet.create({
         alignItems:'center',
     },
     number: {
-        fontSize: 40,
+        fontSize: 30,
     },
     button: {
-    fontSize: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 50,
-    height: 50,
-    borderRadius: 50/2,
+    width: 45,
+    height: 45,
+    borderRadius: 45/2,
     backgroundColor: '#2196F3'
   },
   buttonText: {
     textAlign: 'center',
     fontSize: 20,
-    padding: 20,
     color: 'white'
   }
 })

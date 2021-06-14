@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, TextInput, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, TextInput, Text, View, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
 
 const TimeStepper = ( {title, type, minutes, seconds, increaseTime, decreaseTime, setMinutes, setSeconds}) => {
     const [min, setMin] = useState("00")
@@ -47,14 +47,13 @@ export default TimeStepper
 
 const styles = StyleSheet.create({
     container:{
-        width: '75%',
+        width: '50%',
         paddingBottom: 10,
         margin:15,
         justifyContent: "space-evenly",
         alignItems:'center',
         borderBottomWidth: 1,
         borderColor: "#ddd",
-        borderRadius: 20,
     },
     title: {
         fontSize:25,
@@ -75,21 +74,20 @@ const styles = StyleSheet.create({
         marginLeft:5, 
         marginRight:5},
     number: {
-        fontSize: 40,
+        fontSize: 30,
     },
     button: {
     fontSize: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 50,
-    height: 50,
-    borderRadius: 50/2,
+    width: 45,
+    height: 45,
+    borderRadius: 45/2,
     backgroundColor: '#2196F3'
   },
   buttonText: {
     textAlign: 'center',
     fontSize: 20,
-    padding: 20,
     color: 'white'
   }
 })

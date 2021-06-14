@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView } from "react-native";
 import SingleStepper from "./components/SingleStepper";
 import TimeStepper from "./components/TimeStepper";
 
@@ -163,12 +163,13 @@ export default function App() {
         }
     }
     if(action === "done") {
-      if(seconds === null) {
+      if(seconds === null ) {
         if(type==="work") {setWorkSec("00")}
         if(type==="rest") {setRestSec("00")}
         if(type==="roundsRest") {setRoundsRestSec("00")}
 
-      } else if (seconds < 60 ) {
+      } else if (seconds < 60 ) { 
+        
         if(type==="work") {setWorkSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)}
         if(type==="rest") {setRestSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)}
         if(type==="roundsRest") {setRoundsRestSec(seconds >= 10 ? `${seconds}` : `0${seconds}`)}
@@ -235,7 +236,7 @@ export default function App() {
       />
       
       <TimeStepper
-        title="Rest between rounds"
+        title="Rounds Rest"
         type="roundsRest"
         minutes={roundsRestMin}
         seconds={roundsRestSec}
@@ -244,6 +245,7 @@ export default function App() {
         setMinutes={setMinutes}
         setSeconds={setSeconds}
          />
+        
     </View>
     
   );
@@ -256,4 +258,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  avoid: {
+    alignItems: "center",
+    justifyContent: "center",
+
+  }
 });
