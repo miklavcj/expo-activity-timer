@@ -1,4 +1,6 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from '@react-navigation/native';
 import React, { useState } from "react";
 import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView } from "react-native";
 import SingleStepper from "./components/SingleStepper";
@@ -194,6 +196,7 @@ export default function App() {
   };
 
   return (
+    <NavigationContainer>
     <View style={styles.container}>
       <StatusBar style="dark" />
       <SingleStepper
@@ -247,6 +250,7 @@ export default function App() {
          />
         
     </View>
+    </NavigationContainer>
     
   );
 }
